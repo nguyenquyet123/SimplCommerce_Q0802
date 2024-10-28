@@ -13,5 +13,9 @@
     <ProjectReference Include="..\SimplCommerce.Module.Core\SimplCommerce.Module.Core.csproj" />
     <ProjectReference Include="..\SimplCommerce.Module.Tax\SimplCommerce.Module.Tax.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Areas\Catalog\Views\Accessory\" />
+  </ItemGroup>
 
 </Project>

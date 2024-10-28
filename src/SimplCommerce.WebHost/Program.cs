@@ -28,7 +28,7 @@ var app = builder.Build();
 Configure();
 app.Run();
 
-void ConfigureService() 
+void ConfigureService()
 {
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     builder.Configuration.AddEntityFrameworkConfig(options =>
@@ -82,7 +82,7 @@ void ConfigureService()
 }
 
 void Configure()
-    { 
+{
     if (app.Environment.IsDevelopment())
     {
         app.UseDeveloperExceptionPage();

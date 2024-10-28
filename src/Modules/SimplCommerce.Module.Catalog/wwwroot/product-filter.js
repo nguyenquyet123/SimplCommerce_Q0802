@@ -1,5 +1,5 @@
 ﻿/*global jQuery, noUiSlider, wNumb, window, document, productFilter*/
-(function ($, currentSearchOption, priceSetting) {
+(function ($, currentSearchOption, priceSetting, ratingSetting) {
     $(function () {
         function createUrl() {
             var key,
@@ -22,6 +22,64 @@
             }
 
             return newUrl;
+        }
+
+        $('.sort-by select').on('change', function () {
+            currentSearchOption.sort = $(this).val();
+            window.location = createUrl();
+        });
+
+        //task_rating
+
+        function initRatingSlider() {
+            var ratingSlider = document.getElementById('ratingSlider');
+            if (!ratingSlider) {
+                return;
+            }
+            var ratingValues = [
+                document.getElementById('minRating'),
+                document.getElementById('maxRating')
+            ];
+
+            noUiSlider.create(ratingSlider, {
+                connect: true,
+                start: [ratingSetting.currentMin, ratingSetting.currentMax],
+                range: {
+                    'min': ratingSetting.min,
+                    'max': ratingSetting.max
+                },
+                format: wNumb({
+                    decimals: 0
+                })
+            });
+
+            ratingValues[0].innerHTML = ratingSetting.currentMin;
+            ratingValues[1].innerHTML = ratingSetting.currentMax;
+
+            ratingSlider.noUiSlider.on('update', function (values, handle) {
+                ratingValues[handle].innerHTML = values[handle];
+            });
+
+            ratingSlider.noUiSlider.on('change', function () {
+                var min, max, ratings;
+                ratings = ratingSlider.noUiSlider.get();
+                min = parseInt(ratings[0], 10);
+                max = parseInt(ratings[1], 10);
+
+                if (min !== ratingSetting.min) {
+                    currentSearchOption.minRating = min;
+                } else {
+                    currentSearchOption.minRating = null;
+                }
+
+                if (max !== ratingSetting.max) {
+                    currentSearchOption.maxRating = max;
+                } else {
+                    currentSearchOption.maxRating = null;
+                }
+
+                window.location = createUrl();
+            });
         }
 
         function initPriceSlider() {
@@ -74,7 +132,7 @@
             var index,
                 checkbox = $(this),
                 brand = checkbox.val(),
-                brands = currentSearchOption.brand ? currentSearchOption.brand.split('--') :[];
+                brands = currentSearchOption.brand ? currentSearchOption.brand.split('--') : [];
             if (checkbox.prop("checked") === true) {
                 brands.push(brand);
             } else {
@@ -102,11 +160,8 @@
             window.location = createUrl();
         });
 
-        $('.sort-by select').on('change', function () {
-            currentSearchOption.sort = $(this).val();
-            window.location = createUrl();
-        });
 
         initPriceSlider();
+        initRatingSlider();
     });
-})(jQuery, productFilter.currentSearchOption, productFilter.priceSetting);
+})(jQuery, productFilter.currentSearchOption, productFilter.priceSetting, productFilter.ratingSetting);

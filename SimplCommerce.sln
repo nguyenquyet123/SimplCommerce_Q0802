@@ -136,8 +136,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplCommerce.Module.Paymen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplCommerce.Module.Checkouts", "src\Modules\SimplCommerce.Module.Checkouts\SimplCommerce.Module.Checkouts.csproj", "{4473538D-2BFA-4C53-B642-0D0DC4F16863}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplCommerce.Module.ProductComparison.Tests", "test\SimplCommerce.Module.ProductComparison.Tests\SimplCommerce.Module.ProductComparison.Tests.csproj", "{EEC02E89-E89A-4871-8C3E-4BABA1E56CA7}"
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplCommerce.Module.ShippingFree.Tests", "test\SimplCommerce.Module.ShippingFree.Tests\SimplCommerce.Module.ShippingFree.Tests.csproj", "{16BB6B44-3300-4C22-A37B-D9CD7A4EA300}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplCommerce.Module.ProductComparison.Tests", "test\SimplCommerce.Module.ProductComparison.Tests\SimplCommerce.Module.ProductComparison.Tests.csproj", "{EEC02E89-E89A-4871-8C3E-4BABA1E56CA7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplCommerce.Module.ShippingFree.Tests", "test\SimplCommerce.Module.ShippingFree.Tests\SimplCommerce.Module.ShippingFree.Tests.csproj", "{16BB6B44-3300-4C22-A37B-D9CD7A4EA300}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

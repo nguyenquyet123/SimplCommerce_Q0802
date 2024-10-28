@@ -31,7 +31,7 @@ namespace SimplCommerce.Module.Catalog.Areas.Catalog.Controllers
         {
             var brands = await _brandRepository.Query()
             .Where(x => !x.IsDeleted)
-            .Select(x =>  new BrandVm
+            .Select(x => new BrandVm
             {
                 Id = x.Id,
                 Name = x.Name,
@@ -46,7 +46,7 @@ namespace SimplCommerce.Module.Catalog.Areas.Catalog.Controllers
         public async Task<ActionResult<BrandVm>> Get(long id)
         {
             var brand = await _brandRepository.Query().FirstOrDefaultAsync(x => x.Id == id);
-            if(brand == null)
+            if (brand == null)
             {
                 return NotFound();
             }
@@ -82,7 +82,7 @@ namespace SimplCommerce.Module.Catalog.Areas.Catalog.Controllers
         public async Task<IActionResult> Put(long id, [FromBody] BrandForm model)
         {
             var brand = _brandRepository.Query().FirstOrDefault(x => x.Id == id);
-            if(brand == null)
+            if (brand == null)
             {
                 return NotFound();
             }

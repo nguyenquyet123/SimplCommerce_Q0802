@@ -1,5 +1,6 @@
 ﻿using System;
 using SimplCommerce.Module.Catalog.Areas.Catalog.ViewModels;
+using SimplCommerce.Module.Catalog.Areas.Catalog.ViewModels.Q0802;
 using SimplCommerce.Module.Catalog.Models;
 using SimplCommerce.Module.Core.Services;
 
@@ -12,6 +13,11 @@ namespace SimplCommerce.Module.Catalog.Services
         public ProductPricingService(ICurrencyService currencyService)
         {
             _currencyService = currencyService;
+        }
+
+        public CalculatedProductPrice CalculateAccessoryPrice(AccessoryThumbnail accessoryThumbnail)
+        {
+            return CalculateProductPrice(accessoryThumbnail.Price, accessoryThumbnail.OldPrice, accessoryThumbnail.SpecialPrice, accessoryThumbnail.SpecialPriceStart, accessoryThumbnail.SpecialPriceEnd);
         }
 
         public CalculatedProductPrice CalculateProductPrice(ProductThumbnail productThumbnail)

@@ -83,6 +83,18 @@ namespace SimplCommerce.Module.Catalog.Areas.Catalog.Controllers
                 query = query.Where(x => x.Price <= searchOption.MaxPrice.Value);
             }
 
+            //task_rating
+
+            if (searchOption.MinRating.HasValue)
+            {
+                query = query.Where(q => q.RatingAverage >= searchOption.MinRating.Value);
+            }
+
+            if (searchOption.MaxRating.HasValue)
+            {
+                query = query.Where(q => q.RatingAverage >= searchOption.MaxRating.Value);
+            }
+
             var categories = searchOption.GetCategories();
             if (categories.Any())
             {
@@ -148,6 +160,13 @@ namespace SimplCommerce.Module.Catalog.Areas.Catalog.Controllers
             model.FilterOption.Price.MaxPrice = query.Max(x => x.Price);
             model.FilterOption.Price.MinPrice = query.Min(x => x.Price);
 
+            //task_rating
+            model.FilterOption.Rating.MinRating = query.Min(q => q.RatingAverage);
+            model.FilterOption.Rating.MaxRating = query.Max(q => q.RatingAverage);
+
+            //model.FilterOption.Rating.MinRating = 0;
+            //model.FilterOption.Rating.MaxRating = 5;
+
             var getCategoryName = _contentLocalizationService.GetLocalizationFunction<Category>();
 
             model.FilterOption.Categories = query
@@ -168,7 +187,7 @@ namespace SimplCommerce.Module.Catalog.Areas.Catalog.Controllers
                     Count = g.Count()
                 }).ToList();
 
-            foreach(var item in model.FilterOption.Categories)
+            foreach (var item in model.FilterOption.Categories)
             {
                 item.Name = getCategoryName(item.Id, nameof(item.Name), item.Name);
             }

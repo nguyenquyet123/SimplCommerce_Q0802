@@ -18,7 +18,7 @@ using SimplCommerce.Module.Core.Services;
 namespace SimplCommerce.Module.Catalog.Areas.Catalog.Controllers
 {
     [Area("Catalog")]
-    [Authorize(Roles = "admin, vendor")]
+    //[Authorize(Roles = "admin, vendor")]
     [Route("api/categories")]
     public class CategoryApiController : Controller
     {
@@ -66,7 +66,7 @@ namespace SimplCommerce.Module.Catalog.Areas.Catalog.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public async Task<IActionResult> Post(CategoryForm model)
         {
             if (ModelState.IsValid)
@@ -100,7 +100,7 @@ namespace SimplCommerce.Module.Catalog.Areas.Catalog.Controllers
             if (ModelState.IsValid)
             {
                 var category = await _categoryRepository.Query().FirstOrDefaultAsync(x => x.Id == id);
-                if(category == null)
+                if (category == null)
                 {
                     return NotFound();
                 }
@@ -190,7 +190,7 @@ namespace SimplCommerce.Module.Catalog.Areas.Catalog.Controllers
         public async Task<IActionResult> UpdateProduct(long id, [FromBody] ProductCategoryForm model)
         {
             var productCategory = await _productCategoryRepository.Query().FirstOrDefaultAsync(x => x.Id == id);
-            if(productCategory == null)
+            if (productCategory == null)
             {
                 return NotFound();
             }
@@ -232,7 +232,7 @@ namespace SimplCommerce.Module.Catalog.Areas.Catalog.Controllers
             var parentCategoryId = category.ParentId;
             while (parentCategoryId.HasValue)
             {
-                if(parentCategoryId.Value == childId)
+                if (parentCategoryId.Value == childId)
                 {
                     return true;
                 }

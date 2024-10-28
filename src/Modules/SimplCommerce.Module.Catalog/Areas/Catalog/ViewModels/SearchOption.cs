@@ -24,6 +24,9 @@ namespace SimplCommerce.Module.Catalog.Areas.Catalog.ViewModels
 
         public int? MaxPrice { get; set; }
 
+        public int? MaxRating { get; set; }
+        public int? MinRating { get; set; }
+
         public Dictionary<string, string> ToDictionary()
         {
             var dict = new Dictionary<string, string>();
@@ -57,6 +60,17 @@ namespace SimplCommerce.Module.Catalog.Areas.Catalog.ViewModels
                 dict.Add("sort", Sort);
             }
 
+            //task_rating
+            if (MaxRating.HasValue)
+            {
+                dict.Add("maxRating", MaxRating.Value.ToString());
+            }
+
+            if (MinRating.HasValue)
+            {
+                dict.Add("minRating", MinRating.Value.ToString());
+            }
+
             return dict;
         }
 
@@ -75,6 +89,11 @@ namespace SimplCommerce.Module.Catalog.Areas.Catalog.ViewModels
             var jsonSetting = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
             jsonSetting.StringEscapeHandling = StringEscapeHandling.EscapeHtml;
             return JsonConvert.SerializeObject(this, jsonSetting);
+        }
+
+        public static implicit operator SearchOption(System.IO.SearchOption v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

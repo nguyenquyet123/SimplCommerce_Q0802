@@ -139,7 +139,8 @@ namespace SimplCommerce.Module.Catalog.Areas.Catalog.Controllers
 
             model.FilterOption.Categories = query
                 .SelectMany(x => x.Categories).Where(x => x.Category.IsPublished)
-                .GroupBy(x => new {
+                .GroupBy(x => new
+                {
                     x.Category.Id,
                     x.Category.Name,
                     x.Category.Slug,
@@ -155,7 +156,7 @@ namespace SimplCommerce.Module.Catalog.Areas.Catalog.Controllers
                 })
                 .ToList();
 
-            foreach(var item in model.FilterOption.Categories)
+            foreach (var item in model.FilterOption.Categories)
             {
                 item.Name = getCategoryName(item.Id, nameof(item.Name), item.Name);
             }

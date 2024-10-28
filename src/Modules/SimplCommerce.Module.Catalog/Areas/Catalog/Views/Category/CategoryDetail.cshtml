@@ -11,6 +11,7 @@
 
 @section head {
     <link simpl-append-version="true" rel="stylesheet" href="~/lib/nouislider/distribute/nouislider.min.css" />
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
 }
 
 <nav>
@@ -128,6 +129,33 @@
                     </div>
                 </div>
             }
+            @* task_rating *@
+            @if (Model.FilterOption.Rating.MinRating != Model.FilterOption.Rating.MaxRating)
+            {
+                <div id="accordion-rating" class="mt-4">
+                    <div class="card">
+                        <div class="card-header" id="cardHeaderRating">
+                            <h5 class="mb-0">
+                                <a data-toggle="collapse" href="#collapse-rating" aria-expanded="true" aria-controls="collapse-rating">
+                                    @Localizer["Rating"]
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapse-rating" class="collapse show" aria-labelledby="cardHeaderRating" data-parent="#accordion-rating">
+                            <div class="card-body">
+                                <div id="ratingSlider"></div>
+                                <div class="d-flex justify-content-between mt-2">
+                                    <input type="hidden" id="originMinRating" value="@(Model.FilterOption.Rating.MinRating?.ToString("F0") ?? "")" />
+                                    <input type="hidden" id="originMaxRating" value="@(Model.FilterOption.Rating.MaxRating?.ToString("F0") ?? "")" />
+                                    <span id="minRating"></span>
+                                    <span id="maxRating"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </form>
     </div>
     <div class="col-md-9">
@@ -199,6 +227,15 @@
             currentMin: @((Model.CurrentSearchOption.MinPrice ?? Model.FilterOption.Price.MinPrice).ToString("F0")),
             currentMax: @((Model.CurrentSearchOption.MaxPrice ?? Model.FilterOption.Price.MaxPrice).ToString("F0"))
         };
+
+        //task_rating
+
+        productFilter.ratingSetting = {
+            min: @(Model.FilterOption.Rating.MinRating?.ToString("F0") ?? "0"),
+            max: @(Model.FilterOption.Rating.MaxRating?.ToString("F0") ?? "5"),
+            currentMin: @((Model.CurrentSearchOption.MinRating ?? Model.FilterOption.Rating.MinRating)?.ToString("F0") ?? "0"),
+            currentMax: @((Model.CurrentSearchOption.MaxRating ?? Model.FilterOption.Rating.MaxRating)?.ToString("F0") ?? "5")
+                    };
     </script>
     <script simpl-append-version="true" src="~/_content/SimplCommerce.Module.Catalog/product-filter.js"></script>
 }
